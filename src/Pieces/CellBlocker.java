@@ -6,4 +6,8 @@ public class CellBlocker extends GameToken {
         super(facing, "K");
     }
     
+    @Override
+    public Facing sendDirection(GameToken gametoken, Facing light) {
+        return null;
+    }
 }

@@ -2,6 +2,7 @@ import Controller.*;
 import Pieces.*;
 
 public class Main {
+
     public static void main(String args[]) {// throws FileNotFoundException {
         /*
         Problem problem = Problem.createFromFile("2.txt");
@@ -24,6 +25,10 @@ public class Main {
         board.getLaser().setOn(true);
         board.printBoard(board);
         board.draw();
+
+        GameToken gametoken = new CellBlocker(Facing.E);
+        System.out.println(gametoken.sendDirection(gametoken, Facing.S));
+
         /*
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
             System.out.println("*** SUCCESS ***");

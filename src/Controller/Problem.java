@@ -10,9 +10,6 @@ public class Problem {
     private String problem;
     private ArrayList<String> gameTokens;
     private String solution;
-    
-   // private ArrayList<GameToken> gameTokens;
-    //private String solution;
 
     public Problem() {
         name = "";
@@ -24,7 +21,7 @@ public class Problem {
 
     static public Problem createFromFile(String filename) {
         BufferedReader reader;
-        filename = "data\\" + filename;
+        filename = "src\\data\\" + filename;
         Problem problem = new Problem();
         try {
             reader = new BufferedReader(new FileReader(filename));

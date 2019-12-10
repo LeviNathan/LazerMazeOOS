@@ -6,12 +6,14 @@ public class GameToken {
     private int y;
     private Facing facing;
     private String GameTokenType;
+    private Facing lightDirection;
 
     public GameToken(Facing facing, String GameTokenType) {
         this.x = 0;
         this.y = 0;
         this.facing = facing;
         this.GameTokenType = GameTokenType;
+        lightDirection = null;
     }
 
     public String direction() {
@@ -26,6 +28,21 @@ public class GameToken {
                 return "Token facing West";
             default:
                 return "Failed";
+        }
+    }
+
+    public Facing sendDirection(GameToken gametoken, Facing light) {
+        Facing gtd = gametoken.getFacingDirection();
+        if(gtd == Facing.N && light == Facing.E || gtd == Facing.W && light == Facing.W) {
+            return Facing.S;
+        } else if (gtd == Facing.S && light == Facing.W || gtd == Facing.E && light == Facing.E) {
+            return Facing.N;
+        } else if (gtd == Facing.W && light == Facing.N || gtd == Facing.S && light == Facing.S) {
+            return Facing.E;
+        } else if (gtd == Facing.E && light == Facing.S || gtd == Facing.N && light == Facing.N) {
+            return Facing.W;
+        } else {
+            return null;
         }
     }
 
@@ -54,6 +71,14 @@ public class GameToken {
 
     public String getGameTokenType() {
         return GameTokenType;
+    }
+
+    public Facing getLightDirection() {
+        return lightDirection;
+    }
+
+    public void setLightDirection(Facing lightDirection) {
+        this.lightDirection = lightDirection;
     }
 
     public String toString() {
