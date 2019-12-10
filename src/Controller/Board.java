@@ -1,6 +1,4 @@
 package Controller;
-
-import java.util.*;
 import Pieces.*;
 
 public class Board {
@@ -16,7 +14,6 @@ public class Board {
         char type = gameTokenType.charAt(0);
         char facing = gameTokenType.charAt(1);
         Facing direction = findPieceFacingDirection(facing);
-
         switch(type) {
             case 'L':
                 laser = new Laser(direction);
@@ -84,7 +81,7 @@ public class Board {
         return board;
     }
 
-    public void setBoard(Board board) {
+    public void setBoard(GameToken[][] board) {
         this.board = board;
     }
 

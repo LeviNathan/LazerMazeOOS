@@ -18,13 +18,13 @@ public class LitTarget extends GameToken {
 
     public Facing sendDirection(GameToken gametoken, Facing light) {
         Facing gtd = gametoken.getFacingDirection();
-        if(gtd == N && light == E) {
+        if(gtd == Facing.N && light == Facing.E) {
             return Facing.S;
-        } else if (gtd == S && light == W) {
+        } else if (gtd == Facing.S && light == Facing.W) {
             return Facing.N;
-        } else if (gtd == E && light == S) {
+        } else if (gtd == Facing.E && light == Facing.S) {
             return Facing.E;
-        } else if (gtd == W && light == N) {
+        } else if (gtd == Facing.W && light == Facing.N) {
             return Facing.W;
         } else {
             return null;
@@ -33,7 +33,7 @@ public class LitTarget extends GameToken {
 
     public boolean targetHit(GameToken gametoken, Facing light) {
         Facing gtd = gametoken.getFacingDirection();
-        if (gtd == N && light == S || gtd == S && light == N || gtd == E && light == W || gtd == W && light == E) {
+        if (gtd == Facing.N && light == Facing.S || gtd == Facing.S && light == Facing.N || gtd == Facing.E && light == Facing.W || gtd == Facing.W && light == Facing.E) {
             return true;
         }
         return false;
