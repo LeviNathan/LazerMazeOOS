@@ -1,7 +1,7 @@
 import Controller.*;
 import Pieces.*;
 
-public class main {
+public class Main {
     public static void main(String args[]) {// throws FileNotFoundException {
         /*
         Problem problem = Problem.createFromFile("2.txt");
