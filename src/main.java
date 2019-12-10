@@ -4,26 +4,28 @@ import java.util.*;
 
 public class main {
     public static void main(String args[]) {// throws FileNotFoundException {
+        /*
         Problem problem = Problem.createFromFile("2.txt");
         Board board = problem.createBoard();
         board.addPiece(new Target(Facing.E), 3, 4);
         board.printBoard(board);
-        
+        */
         /*
         LitTarget gametoken = new LitTarget(Facing.S);
         System.out.println(gametoken.getFacingDirection());
         System.out.println(gametoken.getGameTokenType());
         */
-        /*
+        
         Problem problem2 = Problem.createFromFile("2.txt");
         Board board = problem2.createBoard();
-        ConsoleDisplay console = new ConsoleDisplay();
+        //ConsoleDisplay console = new ConsoleDisplay();
         
-        board.setDisplay(console);
+        //board.setDisplay(console);
         board.addPiece(new Target(Facing.E), 3, 4);
         board.getLaser().setOn(true);
+        board.printBoard(board);
         board.draw();
-
+        /*
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
             System.out.println("*** SUCCESS ***");
         else

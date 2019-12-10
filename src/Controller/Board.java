@@ -5,27 +5,22 @@ import Pieces.*;
 
 public class Board {
     private GameToken[][] board;
+    private Laser laser;
 
     public Board() {
         board = new GameToken[5][5];
-        //initializeBoard();
-    }
-
-    public void initializeBoard() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                board[i][j] = null;
-            }
-        }
+        laser = null;
     }
 
     public GameToken createPiece(String gameTokenType) {
         char type = gameTokenType.charAt(0);
         char facing = gameTokenType.charAt(1);
         Facing direction = findPieceFacingDirection(facing);
+
         switch(type) {
             case 'L':
-                return new Laser(direction);
+                laser = new Laser(direction);
+                return laser;
             case 'T':
                 return new Target(direction);
             case 'Z':
@@ -51,8 +46,11 @@ public class Board {
                 return Facing.E;
             case 'S':
                 return Facing.S;
-            default:
+            case 'W':
                 return Facing.W;
+            default:
+                return Facing.z;
+                
         }
     }
 
@@ -78,11 +76,23 @@ public class Board {
         System.out.println(display);
     }
 
+    public void draw() {
+
+    }
+
     public GameToken[][] getBoard() {
         return board;
     }
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public Laser getLaser() {
+        return laser;
+    }
+
+    public void setLaser(Laser laser) {
+        this.laser = laser;
     }
 }

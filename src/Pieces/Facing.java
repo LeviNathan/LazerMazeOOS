@@ -1,5 +1,5 @@
 package Pieces;
 
 public enum Facing {
-    N, E, S, W;
+    N, E, S, W, z;
 }
