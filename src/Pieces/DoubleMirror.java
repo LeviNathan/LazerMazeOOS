@@ -1,6 +1,7 @@
 package Pieces;
-import java.util.*;
 
-public class DoubleMirror {
-    
+public class DoubleMirror extends GameToken {
+    public DoubleMirror(Facing facing) {
+        super(facing, "M");
+    }
 }

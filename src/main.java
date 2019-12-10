@@ -5,7 +5,15 @@ import java.util.*;
 public class main {
     public static void main(String args[]) {// throws FileNotFoundException {
         Problem problem = Problem.createFromFile("2.txt");
-        System.out.println(problem.toString());
+        Board board = problem.createBoard();
+        board.addPiece(new Target(Facing.E), 3, 4);
+        board.printBoard(board);
+        
+        /*
+        LitTarget gametoken = new LitTarget(Facing.S);
+        System.out.println(gametoken.getFacingDirection());
+        System.out.println(gametoken.getGameTokenType());
+        */
         /*
         Problem problem2 = Problem.createFromFile("2.txt");
         Board board = problem2.createBoard();

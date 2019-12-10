@@ -1,6 +1,9 @@
 package Pieces;
-import java.util.*;
 
-public class CellBlocker {
+public class CellBlocker extends GameToken {
+    
+    public CellBlocker(Facing facing) {
+        super(facing, "K");
+    }
     
 }

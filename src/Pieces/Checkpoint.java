@@ -1,6 +1,8 @@
 package Pieces;
-import java.util.*;
 
-public class Checkpoint {
+public class Checkpoint extends GameToken {
     
+    public Checkpoint(Facing facing) {
+        super(facing, "P");
+    }   
 }
