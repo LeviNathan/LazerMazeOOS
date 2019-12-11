@@ -11,15 +11,17 @@ public class Checkpoint extends GameToken {
     @Override
     public Facing sendDirection(GameToken gametoken, Facing light) {
         Facing gtd = gametoken.getFacingDirection();
+        setPassThrough(true);
         if((gtd == Facing.N || gtd == Facing.S) && light == Facing.N) {
             return Facing.N;
         } else if((gtd == Facing.N || gtd == Facing.S) && light == Facing.S) {
             return Facing.S;
         } else if((gtd == Facing.E || gtd == Facing.W) && light == Facing.E) {
-            return Facing.N;
+            return Facing.E;
         } else if((gtd == Facing.E || gtd == Facing.W) && light == Facing.W) {
             return Facing.W;
         } else {
+            setPassThrough(false);
             return null;
         }
     }

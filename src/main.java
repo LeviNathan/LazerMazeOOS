@@ -15,6 +15,12 @@ public class Main {
         board.draw();
         board.printBoard(board);
 
+        if(board.getNumOfTargetsHit() == problem2.getNumOfTargets()) {
+            System.out.println("***SUCCESS***");
+        } else {
+            System.out.println("***FAILED***");
+        }
+
         //System.out.println(board.getPresetGameTokens().toString());
         /*
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))

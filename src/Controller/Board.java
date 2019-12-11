@@ -5,11 +5,13 @@ import Pieces.*;
 public class Board {
     private GameToken[][] board;
     private ArrayList<GameToken> presetGameTokens;
+    private int numOfTargetsHit;
     private Laser laser;
 
     public Board() {
         board = new GameToken[5][5];
         presetGameTokens = new ArrayList<GameToken>();
+        numOfTargetsHit = 0;
         laser = null;
     }
 
@@ -99,6 +101,7 @@ public class Board {
                 addPiece(new Light(laser.getFacingDirection()), positionX, positionY);
             } else {
                 GameToken gametoken = board[positionX][positionY];
+                checkTargetHit(gametoken, lightDirection);
                 lightDirection = gametoken.sendDirection(gametoken, lightDirection);
                 i = findLightPath(lightDirection);
             }
@@ -116,6 +119,15 @@ public class Board {
         if (lightDirection == Facing.W)
             return -1;
         return 25;
+    }
+
+    public void checkTargetHit(GameToken gametoken, Facing light) {
+        if (gametoken.getClass() == LitTarget.class) {
+            LitTarget tmp = new LitTarget(gametoken.getFacingDirection());
+            if(tmp.targetHit(light)) {
+                numOfTargetsHit += 1;
+            }
+        }
     }
 
     public GameToken[][] getBoard() {
@@ -138,6 +150,13 @@ public class Board {
         presetGameTokens.add(gametoken);
     }
 
+    public int getNumOfTargetsHit() {
+        return numOfTargetsHit;
+    }
+
+    public void setNumOfTargetsHit(int numOfTargetsHit) {
+        this.numOfTargetsHit = numOfTargetsHit;
+    }
     public Laser getLaser() {
         return laser;
     }
