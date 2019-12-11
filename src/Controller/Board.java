@@ -30,7 +30,8 @@ public class Board {
             case 'Z':
                 return new LitTarget(direction);
             case 'B':
-                return new BeamSplitter(direction);
+                BeamSplitter beam = new BeamSplitter(direction);
+                return beam;
             case 'M':
                 return new DoubleMirror(direction);
             case 'P':
@@ -65,6 +66,11 @@ public class Board {
             addPresetGameTokens(gameToken);
         }
     }
+
+    public void draw() {
+        laser.setLightDirection(laser.getFacingDirection());
+        drawPath(laser);
+    }
     /*
     | 00 | 01 | 02 | 03 | 04 |      | 00 | 01 | 02 | 03 | 04 |      xy
     | 05 | 06 | 07 | 08 | 09 |      | 10 | 11 | 12 | 13 | 14 |
@@ -72,10 +78,9 @@ public class Board {
     | 15 | 16 | 17 | 18 | 19 |      | 30 | 31 | 32 | 33 | 34 |
     | 20 | 21 | 22 | 23 | 24 |      | 40 | 41 | 42 | 43 | 44 |
     */
-    public void draw() {
-        int position = (laser.getXCoordinate() * 5) + (laser.getYCoordinate());
-        System.out.println(position);
-        Facing lightDirection = laser.getFacingDirection();
+    public void drawPath(GameToken token) {
+        int position = (token.getXCoordinate() * 5) + (token.getYCoordinate());
+        Facing lightDirection = token.getLightDirection();
         int i = findLightPath(lightDirection);
         position = position + i;
         while(position >= 0 && position < 25) {
@@ -85,9 +90,15 @@ public class Board {
                 addPiece(new Light(laser.getFacingDirection()), positionX, positionY);
             } else {
                 GameToken gametoken = board[positionX][positionY];
+                gametoken.setLightDirection(lightDirection);
                 checkTargetHit(gametoken, lightDirection);
+                gametoken.setHit(lightDirection);
                 lightDirection = gametoken.sendDirection(gametoken, lightDirection);
                 i = findLightPath(lightDirection);
+                if (gametoken.getClass() == BeamSplitter.class) {
+                    System.out.println("beam");
+                    drawPath(gametoken);
+                }
             }
             position = position + i;
         }

@@ -66,7 +66,7 @@ public class Problem {
                     if (gameToken.getFacingDirection() == null)
                         findUnknownPieceDirection(gameToken, i, j);
                 }
-                board.addPiece(board.createPiece(token[j]), i, j-1);
+                board.addPiece(gameToken, i, j-1);
             }
         }
         return board;
