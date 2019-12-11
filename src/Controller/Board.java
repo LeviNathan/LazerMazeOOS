@@ -1,12 +1,15 @@
 package Controller;
+import java.util.*;
 import Pieces.*;
 
 public class Board {
     private GameToken[][] board;
+    private ArrayList<GameToken> presetGameTokens;
     private Laser laser;
 
     public Board() {
         board = new GameToken[5][5];
+        presetGameTokens = new ArrayList<GameToken>();
         laser = null;
     }
 
@@ -14,25 +17,35 @@ public class Board {
         char type = gameTokenType.charAt(0);
         char facing = gameTokenType.charAt(1);
         Facing direction = findPieceFacingDirection(facing);
+        GameToken gametoken;
         switch(type) {
             case 'L':
                 laser = new Laser(direction);
-                return laser;
+                gametoken = laser;
+                break;
             case 'T':
-                return new Target(direction);
+                gametoken = new Target(direction);
+                break;
             case 'Z':
-                return new LitTarget(direction);
+                gametoken = new LitTarget(direction);
+                break;
             case 'B':
-                return new BeamSplitter(direction);
+                gametoken = new BeamSplitter(direction);
+                break;
             case 'M':
-                return new DoubleMirror(direction);
+                gametoken = new DoubleMirror(direction);
+                break;
             case 'P':
-                return new Checkpoint(direction);
+                gametoken = new Checkpoint(direction);
+                break;
             case 'K':
-                return new CellBlocker(direction);
+                gametoken = new CellBlocker(direction);
+                break;
             default:
                 return null;
         }
+        addPresetGameTokens(gametoken);
+        return gametoken;
     }
 
     public Facing findPieceFacingDirection(char facing) {
@@ -52,7 +65,8 @@ public class Board {
     }
 
     public void addPiece(GameToken gameToken, int x, int y) {
-        board[x][y] = gameToken;
+        if (board[x][y] == null)
+            board[x][y] = gameToken;
     }
 
     /* Will go to ConsoleDisplay Later */
@@ -74,7 +88,7 @@ public class Board {
     }
 
     public void draw() {
-
+        System.out.println();
     }
 
     public GameToken[][] getBoard() {
@@ -83,6 +97,18 @@ public class Board {
 
     public void setBoard(GameToken[][] board) {
         this.board = board;
+    }
+
+    public ArrayList<GameToken> getPresetGameTokens() {
+        return presetGameTokens;
+    }
+
+    public void setPresetGameTokens(ArrayList<GameToken> gametokens) {
+        presetGameTokens = gametokens;
+    }
+
+    public void addPresetGameTokens(GameToken gametoken) {
+        presetGameTokens.add(gametoken);
     }
 
     public Laser getLaser() {

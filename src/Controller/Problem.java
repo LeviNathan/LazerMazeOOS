@@ -62,10 +62,34 @@ public class Problem {
             String[] token = rows[i].split(",");
             for (int j = 1; j < 6; j++) {
                 GameToken gameToken = board.createPiece(token[j]);
+                if (gameToken != null) {
+                    if (gameToken.getFacingDirection() == Facing.z)
+                        findUnknownPieceDirection(gameToken, i, j);
+                }
                 board.addPiece(gameToken, i, j-1);
             }
         }
         return board;
+    }
+
+    public void findUnknownPieceDirection(GameToken gametoken, int x, int y) {
+        String[] rows = getSolution().split("\n");
+        rows[x] = rows[x].replace("|", ",");
+        String[] token = rows[x].split(",");
+        char facing = token[y].charAt(1);
+        switch(facing) {
+            case 'N':
+                gametoken.setFacingDirection(Facing.N);
+                break;
+            case 'S':
+                gametoken.setFacingDirection(Facing.S);
+                break;
+            case 'E':
+                gametoken.setFacingDirection(Facing.E);
+                break;
+            default:
+                gametoken.setFacingDirection(Facing.W);
+        }
     }
 
     public String toString() {

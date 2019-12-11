@@ -8,8 +8,11 @@ public class Laser extends GameToken {
         laserSwitch = false;
     }
 
-    public Facing sendDirection(GameToken gametoken) {
-        return gametoken.getFacingDirection();
+    public Facing sendDirection(GameToken gametoken, Facing light) {
+        if (light == null)
+            return gametoken.getFacingDirection();
+        else
+            return null;
     }
 
     public boolean getLaserSwitch() {

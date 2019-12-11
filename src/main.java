@@ -16,7 +16,7 @@ public class Main {
         System.out.println(gametoken.getGameTokenType());
         */
         
-        Problem problem2 = Problem.createFromFile("2.txt");
+        Problem problem2 = Problem.createFromFile("25.txt");
         Board board = problem2.createBoard();
         //ConsoleDisplay console = new ConsoleDisplay();
         
@@ -25,9 +25,6 @@ public class Main {
         board.getLaser().setOn(true);
         board.printBoard(board);
         board.draw();
-
-        GameToken gametoken = new CellBlocker(Facing.E);
-        System.out.println(gametoken.sendDirection(gametoken, Facing.S));
 
         /*
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
