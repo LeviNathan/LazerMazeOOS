@@ -66,6 +66,9 @@ public class Problem {
                     if (gameToken.getFacingDirection() == null)
                         findUnknownPieceDirection(gameToken, i, j);
                 }
+                if (gameToken != null)
+                    addGameTokens(gameToken.getGameTokenType());
+                board.setPlayableGameTokens(gameTokens);
                 board.addPiece(gameToken, i, j-1);
             }
         }

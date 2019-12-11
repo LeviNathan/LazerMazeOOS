@@ -5,6 +5,7 @@ import Pieces.*;
 public class Board {
     private GameToken[][] board;
     private ArrayList<GameToken> presetGameTokens;
+    private ArrayList<String> playableGameTokens;
     private int numOfTargetsHit;
     private Laser laser;
     private ConsoleDisplay console;
@@ -12,6 +13,7 @@ public class Board {
     public Board() {
         board = new GameToken[5][5];
         presetGameTokens = new ArrayList<GameToken>();
+        playableGameTokens = new ArrayList<String>();
         numOfTargetsHit = 0;
         laser = null;
         console = null;
@@ -21,26 +23,35 @@ public class Board {
         char type = gameTokenType.charAt(0);
         char facing = gameTokenType.charAt(1);
         Facing direction = findPieceFacingDirection(facing);
+        GameToken gametoken;
         switch(type) {
             case 'L':
                 laser = new Laser(direction);
-                return laser;
+                gametoken = laser;
+                break;
+                //return laser;
             case 'T':
-                return new Target(direction);
+                gametoken = new Target(direction);
+                break;
             case 'Z':
-                return new LitTarget(direction);
+                gametoken = new LitTarget(direction);
+                break;
             case 'B':
-                BeamSplitter beam = new BeamSplitter(direction);
-                return beam;
+                gametoken = new BeamSplitter(direction);
+                break;
             case 'M':
-                return new DoubleMirror(direction);
+                gametoken = new DoubleMirror(direction);
+                break;
             case 'P':
-                return new Checkpoint(direction);
+                gametoken = new Checkpoint(direction);
+                break;
             case 'K':
-                return new CellBlocker(direction);
+                gametoken = new CellBlocker(direction);
+                break;
             default:
                 return null;
         }
+        return gametoken;
     }
 
     public Facing findPieceFacingDirection(char facing) {
@@ -59,11 +70,16 @@ public class Board {
     }
 
     public void addPiece(GameToken gameToken, int x, int y) {
-        if (board[x][y] == null && gameToken != null) {
-            gameToken.setXCoordinate(x);
-            gameToken.setYCoordinate(y);
-            board[x][y] = gameToken;
-            addPresetGameTokens(gameToken);
+        if (board[x][y] == null && gameToken != null ) {
+            if ((!playableGameTokens.isEmpty() && playableGameTokens.contains(gameToken.getGameTokenType())) || gameToken.getClass() == Light.class) {
+                gameToken.setXCoordinate(x);
+                gameToken.setYCoordinate(y);
+                board[x][y] = gameToken;
+                addPresetGameTokens(gameToken);
+                removePlayableGameTokens(gameToken.getGameTokenType());
+            } else {
+                System.out.println("Error: Invalid Game Token not placed.");
+            }
         }
     }
 
@@ -148,6 +164,16 @@ public class Board {
 
     public void addPresetGameTokens(GameToken gametoken) {
         presetGameTokens.add(gametoken);
+    }
+    public ArrayList<String> getPlayableGameTokens() {
+        return playableGameTokens;
+    }
+
+    public void setPlayableGameTokens(ArrayList<String> gametokenList) {
+        playableGameTokens = gametokenList;
+    }
+    public void removePlayableGameTokens(String gametokenType) {
+        playableGameTokens.remove(gametokenType);
     }
 
     public int getNumOfTargetsHit() {
