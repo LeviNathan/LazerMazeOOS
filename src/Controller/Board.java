@@ -7,12 +7,14 @@ public class Board {
     private ArrayList<GameToken> presetGameTokens;
     private int numOfTargetsHit;
     private Laser laser;
+    private ConsoleDisplay console;
 
     public Board() {
         board = new GameToken[5][5];
         presetGameTokens = new ArrayList<GameToken>();
         numOfTargetsHit = 0;
         laser = null;
+        console = null;
     }
 
     public GameToken createPiece(String gameTokenType) {
@@ -63,24 +65,6 @@ public class Board {
             addPresetGameTokens(gameToken);
         }
     }
-
-    /* Will go to ConsoleDisplay Later */
-    public void printBoard(Board board) {
-        String display = "";
-        for (int i = 0; i < 5; i++) {
-            display = display + "|";
-            for (int j = 0; j < 5; j++) {
-                if (board.getBoard()[i][j] == null) {
-                    display = display + "  |" ;
-                } else {
-                    display = display + board.getBoard()[i][j].toString() + "|";
-                }
-            }
-            display = display + "\n";
-        }
-        System.out.println(display);
-    }
-
     /*
     | 00 | 01 | 02 | 03 | 04 |      | 00 | 01 | 02 | 03 | 04 |      xy
     | 05 | 06 | 07 | 08 | 09 |      | 10 | 11 | 12 | 13 | 14 |
@@ -163,5 +147,13 @@ public class Board {
 
     public void setLaser(Laser laser) {
         this.laser = laser;
+    }
+    
+    public ConsoleDisplay getDisplay() {
+        return console;
+    }
+
+    public void setDisplay(ConsoleDisplay console) {
+        this.console = console;
     }
 }

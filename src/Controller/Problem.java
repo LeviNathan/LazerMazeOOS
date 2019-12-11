@@ -33,7 +33,7 @@ public class Problem {
             }
             reader.readLine();
             for(int i = 0; i < 5; i++) {
-                problem.setSolution(problem.getSolution() + reader.readLine() + "\n");
+                problem.setSolution(problem.getSolutionText() + reader.readLine() + "\n");
             }
             reader.close();
         } catch (IOException e) {
@@ -66,14 +66,14 @@ public class Problem {
                     if (gameToken.getFacingDirection() == null)
                         findUnknownPieceDirection(gameToken, i, j);
                 }
-                board.addPiece(gameToken, i, j-1);
+                board.addPiece(board.createPiece(token[j]), i, j-1);
             }
         }
         return board;
     }
 
     public void findUnknownPieceDirection(GameToken gametoken, int x, int y) {
-        String[] rows = getSolution().split("\n");
+        String[] rows = getSolutionText().split("\n");
         rows[x] = rows[x].replace("|", ",");
         String[] token = rows[x].split(",");
         char facing = token[y].charAt(1);
@@ -132,7 +132,7 @@ public class Problem {
         this.problem = problem;
     }
 
-    public String getSolution() {
+    public String getSolutionText() {
         return solution;
     }
 
