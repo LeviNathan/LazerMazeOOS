@@ -68,6 +68,10 @@ public class Board {
     }
 
     public void draw() {
+        if (laser.getLaserSwitch() == false) {
+            System.out.println("Error: Laser is off.");
+            return;
+        }
         laser.setLightDirection(laser.getFacingDirection());
         drawPath(laser);
     }
@@ -84,9 +88,6 @@ public class Board {
         int i = findLightPath(lightDirection);
         position += i;
         while(position >= 0 && position < 25){
-            //if ((((position) % 5 == 0) && i == 1) || (position - 1)% 5 == 0 && i == -1) 
-                //break;
-            System.out.println(position);
             int positionX = position / 5;
             int positionY = position % 5; 
             if (board[positionX][positionY] == null) {
@@ -102,6 +103,8 @@ public class Board {
                 lightDirection = gametoken.getLightDirection();
                 i = findLightPath(lightDirection);
             }
+            if ((((position + i) % 5 == 0) && i == 1) || (position)% 5 == 0 && i == -1) 
+                break;
             position += i;
         }
     }
