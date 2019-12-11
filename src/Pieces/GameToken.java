@@ -33,29 +33,18 @@ public class GameToken {
         }
     }
 
-    public Facing sendDirection(GameToken gametoken, Facing light) {
+    public void sendDirection(GameToken gametoken) {
         Facing gtd = gametoken.getFacingDirection();
-        /*if(gtd == Facing.N && light == Facing.E || gtd == Facing.W && light == Facing.W) {
-            return Facing.S;
-        } else if (gtd == Facing.S && light == Facing.W || gtd == Facing.E && light == Facing.E) {
-            return Facing.N;
-        } else if (gtd == Facing.W && light == Facing.N || gtd == Facing.S && light == Facing.S) {
-            return Facing.E;
-        } else if (gtd == Facing.E && light == Facing.S || gtd == Facing.N && light == Facing.N) {
-            return Facing.W;
-        } else {
-            return null;
-        }*/
         if(gtd == Facing.N && hit == Facing.E || gtd == Facing.W && hit == Facing.W) {
-            return Facing.S;
+            gametoken.setLightDirection(Facing.S);
         } else if (gtd == Facing.S && hit == Facing.W || gtd == Facing.E && hit == Facing.E) {
-            return Facing.N;
+            gametoken.setLightDirection(Facing.N);
         } else if (gtd == Facing.W && hit == Facing.N || gtd == Facing.S && hit == Facing.S) {
-            return Facing.E;
+            gametoken.setLightDirection(Facing.E);
         } else if (gtd == Facing.E && hit == Facing.S || gtd == Facing.N && hit == Facing.N) {
-            return Facing.W;
+            gametoken.setLightDirection(Facing.W);
         } else {
-            return null;
+            gametoken.setLightDirection(null);
         }
     }
 

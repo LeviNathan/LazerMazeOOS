@@ -6,18 +6,19 @@ public class DoubleMirror extends GameToken {
     }
 
     @Override
-    public Facing sendDirection(GameToken gametoken, Facing light) {
+    public void sendDirection(GameToken gametoken) {
         Facing gtd = gametoken.getFacingDirection();
+        Facing light = super.getHit();
         if ((gtd == Facing.N || gtd == Facing.S) && light == Facing.E || (gtd == Facing.E || gtd == Facing.W) && light == Facing.W) {
-            return Facing.N;
+            gametoken.setLightDirection(Facing.N);
         } else if ((gtd == Facing.N || gtd == Facing.S) && light == Facing.W || (gtd == Facing.E || gtd == Facing.W) && light == Facing.E) {
-            return Facing.S;
+            gametoken.setLightDirection(Facing.S);
         } else if((gtd == Facing.N || gtd == Facing.S) && light == Facing.N || (gtd == Facing.E || gtd == Facing.W) && light == Facing.S) {
-            return Facing.E;
+            gametoken.setLightDirection(Facing.E);
         } else if((gtd == Facing.N || gtd == Facing.S) && light == Facing.S || (gtd == Facing.E || gtd == Facing.W) && light == Facing.N) {
-            return Facing.W;
+            gametoken.setLightDirection(Facing.W);
         } else {
-            return null;
+            gametoken.setLightDirection(null);
         }
     }
 }

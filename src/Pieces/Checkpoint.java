@@ -9,20 +9,17 @@ public class Checkpoint extends GameToken {
     }  
 
     @Override
-    public Facing sendDirection(GameToken gametoken, Facing light) {
+    public void sendDirection(GameToken gametoken) {
         Facing gtd = gametoken.getFacingDirection();
+        Facing light = super.getHit();
         setPassThrough(true);
-        if((gtd == Facing.N || gtd == Facing.S) && light == Facing.N) {
-            return Facing.N;
-        } else if((gtd == Facing.N || gtd == Facing.S) && light == Facing.S) {
-            return Facing.S;
-        } else if((gtd == Facing.E || gtd == Facing.W) && light == Facing.E) {
-            return Facing.E;
-        } else if((gtd == Facing.E || gtd == Facing.W) && light == Facing.W) {
-            return Facing.W;
+        if((gtd == Facing.N || gtd == Facing.S) && (light == Facing.N || light == Facing.S)) {
+            gametoken.setLightDirection(light);
+        } else if((gtd == Facing.E || gtd == Facing.W) && (light == Facing.E || light == Facing.W)) {
+            gametoken.setLightDirection(light);
         } else {
             setPassThrough(false);
-            return null;
+            gametoken.setLightDirection(null);
         }
     }
 

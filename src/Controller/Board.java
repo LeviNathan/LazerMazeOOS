@@ -82,8 +82,11 @@ public class Board {
         int position = (token.getXCoordinate() * 5) + (token.getYCoordinate());
         Facing lightDirection = token.getLightDirection();
         int i = findLightPath(lightDirection);
-        position = position + i;
-        while(position >= 0 && position < 25) {
+        position += i;
+        while(position >= 0 && position < 25){
+            //if ((((position) % 5 == 0) && i == 1) || (position - 1)% 5 == 0 && i == -1) 
+                //break;
+            System.out.println(position);
             int positionX = position / 5;
             int positionY = position % 5; 
             if (board[positionX][positionY] == null) {
@@ -91,16 +94,15 @@ public class Board {
             } else {
                 GameToken gametoken = board[positionX][positionY];
                 gametoken.setLightDirection(lightDirection);
+                if (gametoken.getClass() == BeamSplitter.class)
+                    drawPath(gametoken);
                 checkTargetHit(gametoken, lightDirection);
                 gametoken.setHit(lightDirection);
-                lightDirection = gametoken.sendDirection(gametoken, lightDirection);
+                gametoken.sendDirection(gametoken);
+                lightDirection = gametoken.getLightDirection();
                 i = findLightPath(lightDirection);
-                if (gametoken.getClass() == BeamSplitter.class) {
-                    System.out.println("beam");
-                    drawPath(gametoken);
-                }
             }
-            position = position + i;
+            position += i;
         }
     }
 

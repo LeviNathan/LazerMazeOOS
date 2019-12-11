@@ -6,8 +6,8 @@ public class Light extends GameToken {
     }
 
     @Override
-    public Facing sendDirection(GameToken gametoken, Facing light) {
-        return null;
+    public void sendDirection(GameToken gametoken) {
+        gametoken.setLightDirection(null);
     }
 
     @Override

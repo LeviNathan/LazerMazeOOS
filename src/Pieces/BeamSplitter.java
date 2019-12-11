@@ -16,18 +16,19 @@ public class BeamSplitter extends GameToken {
     }
 
     @Override
-    public Facing sendDirection(GameToken gametoken, Facing light) {
+    public void sendDirection(GameToken gametoken) {
         Facing gtd = gametoken.getFacingDirection();
-        if ((gtd == Facing.N || gtd == Facing.S) && super.getHit() == Facing.E || (gtd == Facing.E || gtd == Facing.W) && super.getHit() == Facing.W) {
-            return Facing.N;
-        } else if ((gtd == Facing.N || gtd == Facing.S) && super.getHit() == Facing.W || (gtd == Facing.E || gtd == Facing.W) && super.getHit() == Facing.E) {
-            return Facing.S;
-        } else if((gtd == Facing.N || gtd == Facing.S) && super.getHit() == Facing.N || (gtd == Facing.E || gtd == Facing.W) && super.getHit() == Facing.S) {
-            return Facing.E;
-        } else if((gtd == Facing.N || gtd == Facing.S) && super.getHit() == Facing.S || (gtd == Facing.E || gtd == Facing.W) && super.getHit() == Facing.N) {
-            return Facing.W;
+        Facing light = super.getHit();
+        if ((gtd == Facing.N || gtd == Facing.S) && light == Facing.E || (gtd == Facing.E || gtd == Facing.W) && light == Facing.W) {
+            gametoken.setLightDirection(Facing.N);
+        } else if ((gtd == Facing.N || gtd == Facing.S) && light == Facing.W || (gtd == Facing.E || gtd == Facing.W) && light == Facing.E) {
+            gametoken.setLightDirection(Facing.S);
+        } else if((gtd == Facing.N || gtd == Facing.S) && light == Facing.N || (gtd == Facing.E || gtd == Facing.W) && light == Facing.S) {
+            gametoken.setLightDirection(Facing.E);
+        } else if((gtd == Facing.N || gtd == Facing.S) && light == Facing.S || (gtd == Facing.E || gtd == Facing.W) && light == Facing.N) {
+            gametoken.setLightDirection(Facing.W);
         } else {
-            return null;
+            gametoken.setLightDirection(null);
         }
     }
 }
