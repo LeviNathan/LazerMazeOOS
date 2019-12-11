@@ -17,35 +17,25 @@ public class Board {
         char type = gameTokenType.charAt(0);
         char facing = gameTokenType.charAt(1);
         Facing direction = findPieceFacingDirection(facing);
-        GameToken gametoken;
         switch(type) {
             case 'L':
                 laser = new Laser(direction);
-                gametoken = laser;
-                break;
+                return laser;
             case 'T':
-                gametoken = new Target(direction);
-                break;
+                return new Target(direction);
             case 'Z':
-                gametoken = new LitTarget(direction);
-                break;
+                return new LitTarget(direction);
             case 'B':
-                gametoken = new BeamSplitter(direction);
-                break;
+                return new BeamSplitter(direction);
             case 'M':
-                gametoken = new DoubleMirror(direction);
-                break;
+                return new DoubleMirror(direction);
             case 'P':
-                gametoken = new Checkpoint(direction);
-                break;
+                return new Checkpoint(direction);
             case 'K':
-                gametoken = new CellBlocker(direction);
-                break;
+                return new CellBlocker(direction);
             default:
                 return null;
         }
-        addPresetGameTokens(gametoken);
-        return gametoken;
     }
 
     public Facing findPieceFacingDirection(char facing) {
@@ -59,14 +49,16 @@ public class Board {
             case 'W':
                 return Facing.W;
             default:
-                return Facing.z;
+                return null;
                 
         }
     }
 
     public void addPiece(GameToken gameToken, int x, int y) {
-        if (board[x][y] == null)
+        if (board[x][y] == null && gameToken != null) {
             board[x][y] = gameToken;
+            addPresetGameTokens(gameToken);
+        }
     }
 
     /* Will go to ConsoleDisplay Later */

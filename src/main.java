@@ -1,20 +1,11 @@
+import java.util.Arrays;
+
 import Controller.*;
 import Pieces.*;
 
 public class Main {
 
     public static void main(String args[]) {// throws FileNotFoundException {
-        /*
-        Problem problem = Problem.createFromFile("2.txt");
-        Board board = problem.createBoard();
-        board.addPiece(new Target(Facing.E), 3, 4);
-        board.printBoard(board);
-        */
-        /*
-        LitTarget gametoken = new LitTarget(Facing.S);
-        System.out.println(gametoken.getFacingDirection());
-        System.out.println(gametoken.getGameTokenType());
-        */
         
         Problem problem2 = Problem.createFromFile("25.txt");
         Board board = problem2.createBoard();
@@ -26,6 +17,7 @@ public class Main {
         board.printBoard(board);
         board.draw();
 
+        System.out.println(board.getPresetGameTokens().toString());
         /*
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
             System.out.println("*** SUCCESS ***");

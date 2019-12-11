@@ -63,7 +63,7 @@ public class Problem {
             for (int j = 1; j < 6; j++) {
                 GameToken gameToken = board.createPiece(token[j]);
                 if (gameToken != null) {
-                    if (gameToken.getFacingDirection() == Facing.z)
+                    if (gameToken.getFacingDirection() == null)
                         findUnknownPieceDirection(gameToken, i, j);
                 }
                 board.addPiece(gameToken, i, j-1);
