@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 import Controller.*;
 import Pieces.*;
 
@@ -7,17 +5,17 @@ public class Main {
 
     public static void main(String args[]) {// throws FileNotFoundException {
         
-        Problem problem2 = Problem.createFromFile("25.txt");
+        Problem problem2 = Problem.createFromFile("2.txt");
         Board board = problem2.createBoard();
         //ConsoleDisplay console = new ConsoleDisplay();
         
         //board.setDisplay(console);
         board.addPiece(new Target(Facing.E), 3, 4);
         board.getLaser().setOn(true);
-        board.printBoard(board);
         board.draw();
+        board.printBoard(board);
 
-        System.out.println(board.getPresetGameTokens().toString());
+        //System.out.println(board.getPresetGameTokens().toString());
         /*
         if(console.drawBoardToString(board).equals(problem2.getSolutionText()))
             System.out.println("*** SUCCESS ***");

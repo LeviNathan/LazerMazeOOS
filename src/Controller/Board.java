@@ -49,13 +49,14 @@ public class Board {
             case 'W':
                 return Facing.W;
             default:
-                return null;
-                
+                return null;  
         }
     }
 
     public void addPiece(GameToken gameToken, int x, int y) {
         if (board[x][y] == null && gameToken != null) {
+            gameToken.setXCoordinate(x);
+            gameToken.setYCoordinate(y);
             board[x][y] = gameToken;
             addPresetGameTokens(gameToken);
         }
@@ -70,7 +71,6 @@ public class Board {
                 if (board.getBoard()[i][j] == null) {
                     display = display + "  |" ;
                 } else {
-                    System.out.println(board.getBoard()[i][j].toString());
                     display = display + board.getBoard()[i][j].toString() + "|";
                 }
             }
@@ -79,8 +79,43 @@ public class Board {
         System.out.println(display);
     }
 
+    /*
+    | 00 | 01 | 02 | 03 | 04 |      | 00 | 01 | 02 | 03 | 04 |      xy
+    | 05 | 06 | 07 | 08 | 09 |      | 10 | 11 | 12 | 13 | 14 |
+    | 10 | 11 | 12 | 13 | 14 |      | 20 | 21 | 22 | 23 | 24 |
+    | 15 | 16 | 17 | 18 | 19 |      | 30 | 31 | 32 | 33 | 34 |
+    | 20 | 21 | 22 | 23 | 24 |      | 40 | 41 | 42 | 43 | 44 |
+    */
     public void draw() {
-        System.out.println();
+        int position = (laser.getXCoordinate() * 5) + (laser.getYCoordinate());
+        System.out.println(position);
+        Facing lightDirection = laser.getFacingDirection();
+        int i = findLightPath(lightDirection);
+        position = position + i;
+        while(position >= 0 && position < 25) {
+            int positionX = position / 5;
+            int positionY = position % 5; 
+            if (board[positionX][positionY] == null) {
+                addPiece(new Light(laser.getFacingDirection()), positionX, positionY);
+            } else {
+                GameToken gametoken = board[positionX][positionY];
+                lightDirection = gametoken.sendDirection(gametoken, lightDirection);
+                i = findLightPath(lightDirection);
+            }
+            position = position + i;
+        }
+    }
+
+    public int findLightPath(Facing lightDirection) {
+        if (lightDirection == Facing.N)
+            return -5;
+        if (lightDirection == Facing.S)
+            return 5;
+        if (lightDirection == Facing.E) 
+            return 1;
+        if (lightDirection == Facing.W)
+            return -1;
+        return 25;
     }
 
     public GameToken[][] getBoard() {
